@@ -50,7 +50,7 @@ public class AsistenciaUltrasist {
      * @param args the command line arguments
      */
     
-    public static final  String HORA_ENTRADA =     "09:00";
+    public static final  String HORA_ENTRADA =     "01:55";
     public static final  String HORA_COMIDA =      "15:00";
     public static final  String HORA_FIN_COMIDA =  "17:00";
     public static final  String HORA_SALIDA =      "19:00";
@@ -83,15 +83,16 @@ public class AsistenciaUltrasist {
         //se debe sumar un valor porque el sistema lo toma diferente.
         LocalTime[] screenshotTimes = {
                 LocalTime.of(10, 0, 30),   // 9:00+Sumar 1hora a la deseada
-                LocalTime.of(14, 0, 30),  // 3:00
-                LocalTime.of(16, 0, 30),  // 5:00
+                LocalTime.of(16, 0, 30),  // 3:00
+                LocalTime.of(18, 0, 30),  // 5:00
                 LocalTime.of(20, 0, 30)   // 7:00
         };
         
         // Verifica la hora actual y realiza la captura de pantalla si coincide con los tiempos definidos
         /* */
         while (true) {
-            LocalTime currentTime = LocalTime.now();
+            LocalTime currentTime = LocalTime.now().truncatedTo(java.time.temporal.ChronoUnit.SECONDS);
+            //System.out.println(currentTime);
             for (LocalTime screenshotTime : screenshotTimes) {
                 if (currentTime.equals(screenshotTime)) {
                     System.out.println("Tomando captura: "+clock.getRestarHora(new Date()));
