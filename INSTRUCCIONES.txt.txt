@@ -1,0 +1,45 @@
+Este proyecto Fue dedicado para el control de asistencia en ambientes laborales
+donde se solicite tomar capturas en el horario de entrada, comida, fin de comida y salida para esquema de trabajo remoto.
+El objetivo del aplicativo es automatizar el control de evidencias de documentos word para la captura de asistencia a traves
+de screenshots.
+
+El aplicativo tomará capturas de pantalla sin avisar sobre la primer pantalla del equipo de computo instalado y lo guardara
+en los documentos de WORD previamente añadidos a una ruta en particular.
+
+NOTA: Es importante generar los archivos WORD donde el proyecto trabajara ya que los archivos WORD no los genera el template.
+
+Para la instalación se debe instalar Netbeans 8.2 sin el JDK ya que se uso el JDK 1.8.0.202 (JAVA 8)
+Si se planea ejecutar en un equipo de computo, es importante calibrar las horas ya que debido a un desfazamiento
+ocurrido en Mexico puede que la hora tenga un margen de diferencia dependiendo el lugar de donde se este corriendo.
+
+Ambientación de equipo:
+1.- Crear la carpeta que contendra los archivos .docx que va a tomar la aplicación para capturar las screenshots.
+2.- Crear la carpeta que contendra los archivos .log del aplicativo ya que dia tras dia se iran creando.
+3.- Agregar el archivo "configuration.properties" en la misma carpeta del .jar (Solo en caso de que se quiera ejecutar desde CMD)
+4.- Si se va a ejecutar en consola CMD de Windows es importante añadir como argumento en el comando de ejecución la siguiente linea:
+
+cmd> java -jar -XX:NativeMemoryTracking=summary -Dlog4j.configurationFile=C:\Users\..\log4j2.xml AsistenciaUltrasist.java
+
+El anterior comando es para activar el monitoreo de memoria que lleva usando la aplicación debido a que puede consumir recursos
+de memoria RAM y de Disco Duro.
+
+-XX:NativeMemoryTracking=summary nos ayuda a activar el monitoreo de memoria a traves del CMD con el siguiente comando.
+
+cmd> jcmd puerto VM.native_memory summary
+
+Estas opciones permiten el monitoreo del aplicativo ya que usa bucles infinitos para el control del tiempo y eso puede sabotear el equipo
+
+
+NOTA: Se recomienda apagar el proceso de la aplicación los dias no laborales o de descanso.
+
+En caso de tener problemas con la finalización del proceso principal de la aplicación dentro del sistema WINDOWS 10 se debe ejecutar
+los siguientes comandos:
+
+
+cmd> tasklist | findstr /i "java"
+cmd> taskkill /F /im "javaw.exe"
+
+
+Para aclaración de dudas escribeme a
+ricardoplatimun05@hotmail.com
+Asunto: RYONMA Git AsistenciaUltrasist
