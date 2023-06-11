@@ -50,7 +50,7 @@ public class AsistenciaUltrasist {
      * @param args the command line arguments
      */
     
-    public static final  String HORA_ENTRADA =     "01:55";
+    public static final  String HORA_ENTRADA =     "09:00";
     public static final  String HORA_COMIDA =      "15:00";
     public static final  String HORA_FIN_COMIDA =  "17:00";
     public static final  String HORA_SALIDA =      "19:00";
