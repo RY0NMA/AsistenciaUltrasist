@@ -4,7 +4,7 @@
  * java -jar -XX:NativeMemoryTracking=summary -Dlog4j.configurationFile=C:\Users\..\log4j2.xml AsistenciaUltrasist.java
  *Usa estos comandos para validar la memoria usada por el arhcivo
  *CMD> jps 
- *CMD> jcmd puerto VM.native_memory summary
+ *CMD>  
  *tasklist | findstr /i "java"
  *Usa este comando para matar todos los precos Java que se quedaron abiertos
  *CMD> taskkill /F /im "javaw.exe"
@@ -26,6 +26,7 @@ import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
@@ -110,7 +111,93 @@ public class AsistenciaUltrasist {
                     }else{
                         logger.error("No se encontro archivo Word - "+clock.getRestarHora(new Date()));
                         Toolkit.getDefaultToolkit().beep();
-                        JOptionPane.showMessageDialog(null, "No se encontró el archivo de Evidencia del dia de hoy: \n\n\""+"Evidencia 101929"+"\"\n\nDebes generarlo manualmente y añadir las capturas correspondientes", "Archivo no encontrado", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "No se encontró el archivo de Evidencia del dia de hoy: \n\n\""+nombreArchivo+"\"\n\nDebes generarlo manualmente y añadir las capturas correspondientes", "Archivo no encontrado", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+                /*Si no hay coincidencias en horas, detendremos el reloj un rato para no consumir tantos recursos del sistema*/
+                else{
+                    /*Calculamos la diferencia de Horas*/
+                    if(currentTime.isBefore(screenshotTimes[0])){//Entre las 7PM y 9AM(DEL SIGUIENTE DIA)
+                        //System.out.println("Estamos entre las 00:00 y 09:00 am");
+                        /*Obtenemos la diferencia de horas*/
+                        long diferenciaEnHoras = Duration.between(currentTime, screenshotTimes[0]).toHours();
+                        int horasDormir = (int) (diferenciaEnHoras - 1);
+                        if (horasDormir > 0) {
+                            /*Si las horas para dormir son mayores a 0 dormiremos*/
+                            try {
+                                long tiempoDormido = horasDormir * 3600000; // 5 horas en milisegundos
+                                System.out.println(currentTime + " FALTAN: "+ diferenciaEnHoras + " horas. ME WA ECHAR UN COYOTITO!");
+                                Thread.sleep(tiempoDormido);
+                                System.out.println("YA DESPERTE PRROS " + currentTime);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }else if(currentTime.isBefore(screenshotTimes[1]) && currentTime.isAfter(screenshotTimes[0])){
+                        //System.out.println("Estamos entre las 09:01am y 15:00");
+                        /*Obtenemos la diferencia de horas*/
+                        long diferenciaEnHoras = Duration.between(currentTime, screenshotTimes[1]).toHours();
+                        int horasDormir = (int) (diferenciaEnHoras - 1);
+                        if (horasDormir > 0) {
+                            /*Si las horas para dormir son mayores a 0 dormiremos*/
+                            try {
+                                long tiempoDormido = horasDormir * 3600000; // 5 horas en milisegundos
+                                System.out.println(currentTime + " FALTAN: "+ diferenciaEnHoras + " horas. ME WA ECHAR UN COYOTITO!");
+                                Thread.sleep(tiempoDormido);
+                                System.out.println("YA DESPERTE PRROS " + currentTime);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }else if(currentTime.isBefore(screenshotTimes[2]) && currentTime.isAfter(screenshotTimes[1])){
+                        //System.out.println("Estamos entre las 15:01 y 17:00");
+                        /*Obtenemos la diferencia de horas*/
+                        long diferenciaEnHoras = Duration.between(currentTime, screenshotTimes[2]).toHours();
+                        int horasDormir = (int) (diferenciaEnHoras - 1);
+                        if (horasDormir > 0) {
+                            /*Si las horas para dormir son mayores a 0 dormiremos*/
+                            try {
+                                long tiempoDormido = horasDormir * 3600000; // 5 horas en milisegundos
+                                System.out.println(currentTime + " FALTAN: "+ diferenciaEnHoras + " horas. ME WA ECHAR UN COYOTITO!");
+                                Thread.sleep(tiempoDormido);
+                                System.out.println("YA DESPERTE PRROS " + currentTime);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }else if(currentTime.isBefore(screenshotTimes[3]) && currentTime.isAfter(screenshotTimes[2])){
+                        //System.out.println("Estamos entre las 17:01 y 19:00");
+                        /*Obtenemos la diferencia de horas*/
+                        long diferenciaEnHoras = Duration.between(currentTime, screenshotTimes[3]).toHours();
+                        int horasDormir = (int) (diferenciaEnHoras - 1);
+                        if (horasDormir > 0) {
+                            /*Si las horas para dormir son mayores a 0 dormiremos*/
+                            try {
+                                long tiempoDormido = horasDormir * 3600000; // 5 horas en milisegundos
+                                System.out.println(currentTime + " FALTAN: "+ diferenciaEnHoras + " horas. ME WA ECHAR UN COYOTITO!");
+                                Thread.sleep(tiempoDormido);
+                                System.out.println("YA DESPERTE PRROS " + currentTime);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }else if(currentTime.isAfter(screenshotTimes[3])){
+                        //System.out.println("Estamos entre las 17:01 y 19:00");
+                        /*Obtenemos la diferencia de horas*/
+                        //long diferenciaEnHoras = Duration.between(currentTime, screenshotTimes[3]).toHours();
+                        //int horasDormir = (int) (diferenciaEnHoras - 1);
+                        int horasDormir = 5;
+                        if (horasDormir > 0) {
+                            /*Si las horas para dormir son mayores a 0 dormiremos*/
+                            try {
+                                long tiempoDormido = horasDormir * 3600000; // 5 horas en milisegundos
+                                System.out.println(currentTime + " FALTAN: "+ horasDormir + " horas. ME WA ECHAR UN COYOTITO EN LO QUE TERMINA EL DIA!");
+                                Thread.sleep(tiempoDormido);
+                                System.out.println("YA DESPERTE PRROS " + currentTime);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
                     }
                 }
             }
